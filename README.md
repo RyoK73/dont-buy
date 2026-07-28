@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Don't Buy
 
-## Getting Started
+### アプリコンセプト
 
-First, run the development server:
+ほしいものがある時、購入資金以外にも必要なものがある。それは購入への心理的なハードルを超えることである。
+お金を貯めることで購入資金が溜まるけど、果たして買っていいのか...罪悪感ともったいないという気持ちがその欲しい物への到達を阻む。
+過去にはなんども無駄な買い物・お菓子・ちょっと欲しいものを我慢してきたというのに、金額が大きくなると購入するのも躊躇してしまう。
+また、貯金がなかなかできない人もいる。目についたほしいものを買ってしまって気づいたときにはすっからかん...
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+このアプリはそんな悩みを解決する。
+アプリ上でその時買う予定だったものを購入することで、我慢した履歴とともに我慢した分のお金が溜まっていく。もちろん現実でも買わなかった分のお金は溜まる。
+そうして、現実で失うはずだったお金が溜まっていく。貯金するときに重要なことは収入から先に貯金額を分けておくことだが、このアプリのアプローチは逆である。
+買わなかったという行為によりお金が溜まる。そして我慢したんだという気持ちも溜まる。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+その貯金額が目標に達した時、アプリを見返せばこれまでどう節約して、何を我慢したのかの履歴が見える。
+それにより欲しい物を買うときの心理的ハードルも下がり、お金も溜まるという一石二鳥効果が得られる。
+このアプリは節約と我慢の貯金アプリを目指す。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 実装したい機能ざっくり
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 購入するつもりだった商品をすぐに節約履歴に変えられるUI
+- 節約履歴を振り返れる統計UI
+- 「今月〇〇円節約しました！」や「今日/今週/今月のあなたの行動でx%目標日がづきました！」などのモチベーションを上げる表示
+- 複数の目標商品を登録できる機能(課金要素？)
+- ログイン機能
+- アプリポートフォリオ用のゲストログインユーザー(本筋と外れるかも)
+- その他あれば...
 
-## Learn More
+### 技術スタック
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| ジャンル       | 技術スタック  | 言語       |
+| -------------- | ------------- | ---------- |
+| フロントエンド | Next.js/React | TypeScript |
+| バックエンド   | Next.js       | TypeScript |
+| DB             | Supabase      | PostgreSQL |
