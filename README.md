@@ -1,36 +1,40 @@
+**English** | [日本語](README_ja.md)
+
 ## Don't Buy
 
-### アプリコンセプト
+### App Concept
 
-ほしいものがある時、購入資金以外にも必要なものがある。それは購入への心理的なハードルを超えることである。
-お金を貯めることで購入資金が溜まるけど、果たして買っていいのか...罪悪感ともったいないという気持ちがその欲しい物への到達を阻む。
-過去にはなんども無駄な買い物・お菓子・ちょっと欲しいものを我慢してきたというのに、金額が大きくなると購入するのも躊躇してしまう。
-また、貯金がなかなかできない人もいる。目についたほしいものを買ってしまって気づいたときにはすっからかん...
+When there's something you want to buy, saving up the money isn't the only thing standing in your way. There's also a psychological hurdle to actually going through with the purchase.
+You save up the money, but then you hesitate: is it really okay to buy it? Guilt and a nagging sense of "what a waste" get in the way of reaching the thing you wanted.
+You've resisted plenty of small purchases before — snacks, little impulse buys — but once the price tag gets bigger, you freeze up and can't pull the trigger.
+And some people struggle to save at all: they buy whatever catches their eye, and before they know it, they're broke.
 
-このアプリはそんな悩みを解決する。
-アプリ上でその時買う予定だったものを購入することで、我慢した履歴とともに我慢した分のお金が溜まっていく。もちろん現実でも買わなかった分のお金は溜まる。
-そうして、現実で失うはずだったお金が溜まっていく。貯金するときに重要なことは収入から先に貯金額を分けておくことだが、このアプリのアプローチは逆である。
-買わなかったという行為によりお金が溜まる。そして我慢したんだという気持ちも溜まる。
+This app is built to solve that.
+Every time you resist buying something you were planning to buy, you record it in the app — and the amount you resisted, along with a history of that restraint, accumulates. Of course, the money you didn't spend piles up in real life too.
+The money you would have lost in the real world builds up instead. Conventional wisdom says the key to saving is setting money aside from your income first — this app flips that approach.
+The act of *not* buying is what makes the money accumulate. And along with it, a sense of "I held back" accumulates too.
 
-その貯金額が目標に達した時、アプリを見返せばこれまでどう節約して、何を我慢したのかの履歴が見える。
-それにより欲しい物を買うときの心理的ハードルも下がり、お金も溜まるという一石二鳥効果が得られる。
-このアプリは節約と我慢の貯金アプリを目指す。
+Once your savings reach the goal, you can look back through the app and see a history of everything you saved on and everything you resisted buying.
+That lowers the psychological hurdle the next time you want to buy something *and* builds up money at the same time — a two-birds-one-stone effect.
+This app aims to be a savings app built around frugality and restraint.
 
-### 実装したい機能ざっくり
+### Planned Features (rough sketch)
 
-- 購入するつもりだった商品をすぐに節約履歴に変えられるUI・登録機能
-- 節約履歴を振り返れる統計UI
-- 「今月〇〇円節約しました！」や「今日/今週/今月のあなたの行動でx%目標日がづきました！」などのモチベーションを上げる表示
-- 複数の目標商品を登録できる機能(課金要素？)
-- ログイン機能
-- アプリポートフォリオ用のゲストログインユーザー(本筋と外れるかも)
-- その他あれば...
-- "BUY"モードでは購入したい商品とそのためにどれくらい節約ゲージが溜まっているかを一覧で確認可能、"Don't Buy"モードでは節約履歴と登録画面が表示される。2つのモードをワンボタンで切り替え可能で、それぞれテーマが異なる。
+- UI and registration flow for instantly converting a purchase you were about to make into a "saved" entry
+- Statistics UI for looking back over your savings history
+- Motivational displays like "You saved ¥XX,XXX this month!" or "Your actions today/this week/this month got you X% closer to your goal!"
+- Registering multiple goal items at once (unlimited, free)
+- Login functionality
+- A guest login user for portfolio purposes (may be a bit off the main track)
+- Anything else that comes up...
+- "BUY" mode shows a list of items you want to buy along with how full each item's savings gauge is; "Don't Buy" mode shows your savings history and the entry screen. The two modes switch with a single button and each has its own theme.
 
-### 技術スタック
+For the more detailed feature design, data model, and technology choices, see [docs/plan.md](docs/plan.md) (Japanese).
 
-| ジャンル       | 技術スタック  | 言語       |
-| -------------- | ------------- | ---------- |
-| フロントエンド | Next.js/React | TypeScript |
-| バックエンド   | Next.js       | TypeScript |
-| DB             | Supabase      | PostgreSQL |
+### Tech Stack
+
+| Layer    | Stack         | Language   |
+| -------- | ------------- | ---------- |
+| Frontend | Next.js/React | TypeScript |
+| Backend  | Next.js       | TypeScript |
+| DB       | Supabase      | PostgreSQL |
