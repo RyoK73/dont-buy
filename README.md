@@ -3,6 +3,9 @@
 # Don't Buy
 
 > Current status: concept and design phase
+> `./mock-image` will be removed once the frontend design work is complete.
+
+![](./mock-image/title-login-page.png)
 
 ## Is there something you want?
 
@@ -47,11 +50,6 @@ Local development setup instructions will be added after implementation.
 ## Images
 
 > `./mock-image` will be removed once the frontend design work is complete.
-
-![](./mock-image/title-login-page.png)
-![](./mock-image/dont-buy-stats-input-page.png)
-![](./mock-image/buy-stats-add-new-page.png)
-![](./mock-image/add-new-wishitem-page.png)
 
 ## License
 
