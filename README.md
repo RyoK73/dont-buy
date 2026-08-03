@@ -43,6 +43,15 @@ For the more detailed feature design, data model, and technology choices, see [d
 
 Local development setup instructions will be added after implementation.
 
+## Images
+
+> `./mock-image` will be removed once the frontend design work is complete.
+
+![](./mock-image/Dont-Buy App Design-selection.png)
+![](./mock-image/Dont-Buy App Design-selection (1).png)
+![](./mock-image/Dont-Buy App Design-selection (2).png)
+![](./mock-image/Dont-Buy App Design-selection (3).png)
+
 ## License
 
 The code in this repository is published for portfolio viewing purposes. Unauthorized reproduction or redistribution is prohibited.

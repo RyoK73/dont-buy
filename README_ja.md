@@ -43,6 +43,15 @@ Don't Buy では、買う予定だったものを記録するだけで、我慢�
 
 ローカル環境でのセットアップ手順は実装後に追記予定。
 
+## イメージ
+
+> フロントデザイン開発完了後に./mock-imageは削除予定
+
+![](./mock-image/Dont-Buy App Design-selection.png)
+![](./mock-image/Dont-Buy App Design-selection (1).png)
+![](./mock-image/Dont-Buy App Design-selection (2).png)
+![](./mock-image/Dont-Buy App Design-selection (3).png)
+
 ## ライセンス
 
 本リポジトリのコードはポートフォリオ閲覧を目的として公開しています。無断転載・再配布は禁止します。
