@@ -48,10 +48,10 @@ Local development setup instructions will be added after implementation.
 
 > `./mock-image` will be removed once the frontend design work is complete.
 
-![](./mock-image/Dont-Buy App Design-selection.png)
-![](./mock-image/Dont-Buy App Design-selection (1).png)
-![](./mock-image/Dont-Buy App Design-selection (2).png)
-![](./mock-image/Dont-Buy App Design-selection (3).png)
+![](./mock-image/title-login-page.png)
+![](./mock-image/dont-buy-stats-input-page.png)
+![](./mock-image/buy-stats-add-new-page.png)
+![](./mock-image/add-new-wishitem-page.png)
 
 ## License
 
