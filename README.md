@@ -7,6 +7,10 @@
 
 ![](./mock-image/title-login-page.png)
 
+> `./mock-image` will be removed once the frontend design work is complete.
+
+![](./mock-image/title-login-page.png)
+
 ## Is there something you want?
 
 Even when there's something you want, the bigger the price tag, the more you hesitate over whether it's really okay to buy it — and that hesitation keeps you from actually going through with the purchase.

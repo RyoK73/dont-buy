@@ -7,6 +7,10 @@
 
 ![](./mock-image/title-login-page.png)
 
+> フロントデザイン開発完了後に./mock-imageは削除予定
+
+![](./mock-image/title-login-page.png)
+
 ## ほしいものはありますか？
 
 ほしいものがあっても、金額が大きくなるほど「買っていいのか」という迷いが生まれ、購入に踏み切れなくなるものです。
