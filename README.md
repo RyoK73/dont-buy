@@ -28,6 +28,7 @@ The more restraint you build up, the lower the hurdle becomes the next time you 
 - A guest login user for portfolio purposes (may be a bit off the main track)
 - Anything else that comes up...
 - "BUY" mode shows a list of items you want to buy along with how full each item's savings gauge is; "Don't Buy" mode shows your savings history and the entry screen. The two modes switch with a single button and each has its own theme.
+- Dark mode (dusk theme): not perfectly dark
 
 For the more detailed feature design, data model, and technology choices, see [docs/plan.md](docs/plan.md) (Japanese).
 
