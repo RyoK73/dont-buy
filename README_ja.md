@@ -3,13 +3,6 @@
 # Don't Buy
 
 > 現在のステータス: 構想・設計段階
-> フロントデザイン開発完了後に./mock-imageは削除予定
-
-![](./mock-image/title-login-page.png)
-
-> フロントデザイン開発完了後に./mock-imageは削除予定
-
-![](./mock-image/title-login-page.png)
 
 ## ほしいものはありますか？
 
@@ -50,6 +43,15 @@ Don't Buy では、買う予定だったものを記録するだけで、我慢�
 ## セットアップ
 
 ローカル環境でのセットアップ手順は実装後に追記予定。
+
+## イメージ
+
+> フロントデザイン開発完了後に./mock-imageは削除予定
+
+![](./mock-image/title-login-page.png)
+![](./mock-image/dont-buy-stats-input-page.png)
+![](./mock-image/buy-stats-add-new-page.png)
+![](./mock-image/add-new-wishitem-page.png)
 
 ## ライセンス
 
