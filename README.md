@@ -2,6 +2,8 @@
 
 # Don't Buy
 
+**Don't Buy Wasting, Save for Meaning**
+
 > Current status: concept and design phase
 
 ## Is there something you want?
