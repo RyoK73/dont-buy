@@ -2,6 +2,8 @@
 
 # Don't Buy
 
+**Don't Buy Wasting, Save for Meaning** - 「浪費をやめて、価値に変える」
+
 > 現在のステータス: 構想・設計段階
 
 ## ほしいものはありますか？
