@@ -16,7 +16,7 @@ CREATE TABLE public.goals (
 	DEFAULT NOW()
 );
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE goals TO authenticated;
+GRANT SELECT, INSERT, DELETE, UPDATE ON TABLE goals TO authenticated;
 
 CREATE INDEX IF NOT EXISTS "idx_goals_user_id" ON goals USING btree (user_id);
 
