@@ -8,7 +8,7 @@ CREATE TABLE public.goals (
 	REFERENCES auth.users (id) ON DELETE CASCADE
 	DEFAULT auth.uid(),
 	name text NOT NULL,
-	price int NOT NULL,
+	price int NOT NULL CHECK (price > 0),
 	url text,
 	purchased_at TIMESTAMP WITH TIME ZONE,
 	created_at TIMESTAMP WITH TIME ZONE
@@ -61,7 +61,7 @@ CREATE TABLE public.saving_entries (
 	NOT NULL
 	REFERENCES auth.users (id) ON DELETE CASCADE
 	DEFAULT auth.uid(),
-	amount int NOT NULL,
+	amount int NOT NULL CHECK (amount > 0),
 	category text,
 	memo text,
 	created_at TIMESTAMP WITH TIME ZONE
