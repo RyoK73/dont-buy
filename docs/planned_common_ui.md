@@ -1,11 +1,42 @@
-- [Button](https://ui.shadcn.com/docs/components/base/button): 付箋風ボタン
-  - [ Tabs](https://ui.shadcn.com/docs/components/base/tabs): モード切替
-- [Label](https://ui.shadcn.com/docs/components/base/label)
-- [Input group](https://ui.shadcn.com/docs/components/base/input-group): ログイン・新規登録
-- [Data Table](https://ui.shadcn.com/docs/components/base/data-table): 節約履歴
-- [Progress](https://ui.shadcn.com/docs/components/base/progress): 節約累計
-- [Toast](https://ui.shadcn.com/docs/componentshttps://github.com/RyoK73/dont-buy): 通知用
-- [Toggle Group](https://ui.shadcn.com/docs/components/base/toggle-group): ジャンル選択
-- [Sheet](https://ui.shadcn.com/docs/components/base/sheet): ポップアップ
-- [Chart](https://ui.shadcn.com/docs/components/base/chart): 節約のグラフ
-- [Separator](https://ui.shadcn.com/docs/components/base/separator): 区切り線
+# components/common/ 計画
+
+DESIGN.md の `components` トークンごとに、shadcn/ui のプリミティブを Don't Buy 風（ノート・付箋モチーフ）にラップした汎用コンポーネントを `components/common/` に置く。粒度は既存の `sticky-note-button.tsx` に倣い、画面単位ではなく「デザイントークン単位」。shadcn プリミティブをそのまま各画面で使うのではなく、必ずラッパーを経由する。
+
+## ページ共通レイアウト
+
+- **NotebookPage**（新規・shadcn非依存）: 全画面共通の土台。`neutral-paper` 罫線背景、左端 `secondary` 色マージンライン、ダークモード切り替えをまとめて提供する。DESIGN.md の Layout / Elevation 節を実装で集約する場所。
+
+## DESIGN.md トークン対応
+
+- **input** → [Input](https://ui.shadcn.com/docs/components/base/input) + [Label](https://ui.shadcn.com/docs/components/base/label)
+  - ラッパー: `NoteInput`（背景なし・`primary` 色下線のみの「記入欄」。メール/パスワード/商品名/価格などで共通利用）
+- **button-primary / button-primary-hover / button-secondary** → [Button](https://ui.shadcn.com/docs/components/base/button)
+  - ラッパー: `sticky-note-button.tsx`（既存）に `variant="buy" | "save"` を追加し、両方のアクション種別を1コンポーネントでカバーする（付箋の傾き + ドロップシャドウは両方に必要なため）
+- **tab-toggle-active / tab-toggle-inactive** → [Tabs](https://ui.shadcn.com/docs/components/base/tabs)
+  - ラッパー: `ModeTabs`（Don't Buy / BUY 切替。アクティブ側のみ pill 塗りつぶし）
+- **chip / chip-selected** → [Toggle Group](https://ui.shadcn.com/docs/components/base/toggle-group)
+  - ラッパー: `CategoryChipGroup`（食費・娯楽・衣類などジャンル選択。選択中は `accent-buy` 塗り）
+- **progress-bar-track / progress-bar-fill / progress-bar-fill-complete** → [Progress](https://ui.shadcn.com/docs/components/base/progress)
+  - ラッパー: `GoalProgressBar`（未達成は `accent-buy`、100%達成で `accent-save-deep` に自動切替）
+- **list-item** → 自前実装（[Separator](https://ui.shadcn.com/docs/components/base/separator) で区切るのみ、カード化しない）
+  - ラッパー: `SavingHistoryList` / `SavingHistoryItem`（チェック・日付・品目・金額を横並び表示。Data Table は不使用 — カード的な重厚感が DESIGN.md の「強いシャドウ禁止」方針と合わないため）
+- **badge-purchasable** → [Badge](https://ui.shadcn.com/docs/components/base/badge)
+  - ラッパー: `StatusBadge`（「購入可能」バッジ、「今週の記帳で目標まで+3%」のようなピル表示の両方をカバー）
+
+## 画面機能コンポーネント（トークン外）
+
+- **下部入力ドック**（欲しいもの登録・記帳フォーム）→ [Sheet](https://ui.shadcn.com/docs/components/base/sheet)（`side="bottom"`）
+  - ラッパー: `BottomDockSheet`（画面下からせり上がる形。`neutral-paper-line` 系背景 + `primary` 境界線で紙面と区別）
+- **節約グラフ**（曜日別棒グラフ、当日のバーのみ `accent-save-deep` ハイライト）→ [Chart](https://ui.shadcn.com/docs/components/base/chart)（recharts ラッパー）
+  - ラッパー: `WeeklySavingChart`
+- **通知**（記帳・登録完了など）→ [Toast](https://ui.shadcn.com/docs/components/base/toast)
+  - ラッパーは最小限（トースト自体の見た目は shadcn デフォルトに近い想定、追って検討）
+
+## 決定事項メモ
+
+- コンポーネント粒度: 画面単位ではなく DESIGN.md トークン単位のラッパーとする
+- 節約帳履歴は Data Table ではなく list-item + Separator の素朴なリストで実装する
+- 下部入力ドックは Dialog ではなく Sheet(bottom) で実装する
+- badge-purchasable 用に Badge を新規追加する
+- 週間グラフは shadcn Chart（recharts）を使う
+- 全画面共通のノート風背景・マージンラインは NotebookPage として components/common/ の計画に含める
