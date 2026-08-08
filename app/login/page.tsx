@@ -1,25 +1,28 @@
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { NoteInput } from "@/components/common/note-input";
 import Link from "next/link";
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-  FieldGroup,
-} from "@/components/ui/field";
+import { Field, FieldDescription, FieldGroup } from "@/components/ui/field";
 
 const Page = () => {
   return (
     <FieldGroup>
       <Field>
-        <FieldLabel htmlFor="email-input">Email</FieldLabel>
-        <Input id="email-input" type="email" placeholder="dont-buy@buy.com" />
+        <NoteInput
+          label="Email"
+          id="email-input"
+          type="email"
+          placeholder="dont-buy@buy.com"
+        />
         <FieldDescription>メールアドレスを入力してください</FieldDescription>
       </Field>
       <Field>
-        <FieldLabel htmlFor="password-input">User Name</FieldLabel>
-        <Input id="password-input" type="password" placeholder="パスワード" />
+        <NoteInput
+          label="Password"
+          id="password-input"
+          type="password"
+          placeholder="xxxxxxxx"
+        />
         <FieldDescription>パスワードを入力してください</FieldDescription>
       </Field>
       <Field className="flex">
