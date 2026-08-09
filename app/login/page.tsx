@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { NoteInput } from "@/components/common/note-input";
+import { NoteInput } from "@/components/ui/note-input";
 import Link from "next/link";
 import { Field, FieldDescription, FieldGroup } from "@/components/ui/field";
 
