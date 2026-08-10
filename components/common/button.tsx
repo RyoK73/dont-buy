@@ -20,7 +20,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         sticky:
           "-rotate-[1.5deg] rounded-sm border-none bg-accent-buy text-[#3a2e22] shadow-[2px_3px_0_rgba(0,0,0,0.15)] hover:rotate-0 hover:bg-accent-buy hover:shadow-[3px_4px_0_rgba(0,0,0,0.15)] active:rotate-0 active:shadow-none",
-        "sticky-secondary":
+        stickySecondary:
           "-rotate-[1.5deg] rounded-sm border-none bg-accent-save text-[#3a2e22] shadow-[2px_3px_0_rgba(0,0,0,0.15)] hover:rotate-0 hover:bg-accent-save hover:shadow-[3px_4px_0_rgba(0,0,0,0.15)] active:rotate-0 active:shadow-none",
       },
       size: {
