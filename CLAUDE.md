@@ -9,3 +9,4 @@
 - ルール関係: `./docs/rules`
 - 一部過去ディスカッション履歴: `./docs/discussion`
 - 命名規則: `./docs/rules/naming.md`
+- 言語系: `./docs/rules/{language}.md`
