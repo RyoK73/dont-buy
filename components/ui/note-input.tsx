@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "@base-ui/react";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
