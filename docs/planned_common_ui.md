@@ -18,7 +18,7 @@ DESIGN.md の `components` トークンごとに、shadcn/ui のプリミティ�
 
 ## 画面機能コンポーネント（トークン外）
 
-- [ ] **下部入力ドック**（欲しいもの登録・記帳フォーム）→ [Sheet](https://ui.shadcn.com/docs/components/base/sheet)（`side="bottom"`）: `BottomDockSheet`（画面下からせり上がる形。`neutral-paper-line` 系背景 + `primary` 境界線で紙面と区別）
+- [x] **下部入力ドック**（欲しいもの登録・記帳フォーム）→ [Sheet](https://ui.shadcn.com/docs/components/base/sheet)（`side="bottom"`）: `BottomDockSheet`（画面下からせり上がる形。`neutral-paper-line` 系背景 + `primary` 境界線で紙面と区別）
 - [x] **節約グラフ**（曜日別棒グラフ、当日のバーのみ `accent-save-deep` ハイライト）→ [Chart](https://ui.shadcn.com/docs/components/base/chart)（recharts ラッパー）: `WeeklySavingChart`
 - [x] **通知**（記帳・登録完了など）→ [Toast](https://ui.shadcn.com/docs/components/base/toast)をそのまま活用
 
