@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Klee_One, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { NotebookPage } from "@/components/common/notebook-page";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -33,16 +34,19 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
+      suppressHydrationWarning
       className={cn(
         "h-full",
         "antialiased",
         notoSansJP.variable,
         kleeOne.variable,
         geistMono.variable,
-        "font-sans"
+        "font-sans",
       )}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <NotebookPage>{children}</NotebookPage>
+      </body>
     </html>
   );
 }
