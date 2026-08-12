@@ -4,7 +4,7 @@ DESIGN.md の `components` トークンごとに、shadcn/ui のプリミティ�
 
 ## ページ共通レイアウト
 
-- [ ] **NotebookPage**（新規・shadcn非依存）: 全画面共通の土台。`neutral-paper` 罫線背景、左端 `secondary` 色マージンライン、ダークモード切り替えをまとめて提供する。DESIGN.md の Layout / Elevation 節を実装で集約する場所。
+- [x] **NotebookPage**（新規・shadcn非依存）: `app/layout.tsx` 直下で全ページをラップする全体土台。`neutral-paper` 罫線背景、Fixed-Max-Width（`max-w-[428px]` 中央寄せ）、`next-themes` によるダークモード切り替え（右上固定トグルボタン）をまとめて提供する。DESIGN.md の Layout / Elevation 節を実装で集約する場所。
 
 ## DESIGN.md トークン対応
 
@@ -18,9 +18,9 @@ DESIGN.md の `components` トークンごとに、shadcn/ui のプリミティ�
 
 ## 画面機能コンポーネント（トークン外）
 
-- [ ] **下部入力ドック**（欲しいもの登録・記帳フォーム）→ [Sheet](https://ui.shadcn.com/docs/components/base/sheet)（`side="bottom"`）: `BottomDockSheet`（画面下からせり上がる形。`neutral-paper-line` 系背景 + `primary` 境界線で紙面と区別）
-- [ ] **節約グラフ**（曜日別棒グラフ、当日のバーのみ `accent-save-deep` ハイライト）→ [Chart](https://ui.shadcn.com/docs/components/base/chart)（recharts ラッパー）: `WeeklySavingChart`
-- [ ] **通知**（記帳・登録完了など）→ [Toast](https://ui.shadcn.com/docs/components/base/toast)をそのまま活用
+- [x] **下部入力ドック**（欲しいもの登録・記帳フォーム）→ [Sheet](https://ui.shadcn.com/docs/components/base/sheet)（`side="bottom"`）: `BottomDockSheet`（画面下からせり上がる形。`neutral-paper-line` 系背景 + `primary` 境界線で紙面と区別）
+- [x] **節約グラフ**（曜日別棒グラフ、当日のバーのみ `accent-save-deep` ハイライト）→ [Chart](https://ui.shadcn.com/docs/components/base/chart)（recharts ラッパー）: `WeeklySavingChart`
+- [x] **通知**（記帳・登録完了など）→ [Toast](https://ui.shadcn.com/docs/components/base/toast)をそのまま活用
 
 ## 決定事項メモ
 
@@ -29,4 +29,4 @@ DESIGN.md の `components` トークンごとに、shadcn/ui のプリミティ�
 - [ ] 下部入力ドックは Dialog ではなく Sheet(bottom) で実装する
 - [ ] badge-purchasable 用に Badge を新規追加する
 - [ ] 週間グラフは shadcn Chart（recharts）を使う
-- [ ] 全画面共通のノート風背景・マージンラインは NotebookPage として components/common/ の計画に含める
+- [x] 全画面共通のノート風背景は NotebookPage として実装する（左端マージンラインは壁打ちの結果不採用）
