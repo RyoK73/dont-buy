@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { NoteButton } from "@/components/common/note-button";
 import { Label } from "@/components/ui/label";
-import { NoteInput } from "@/components/ui/note-input";
+import { NoteInput } from "@/components/common/note-input";
 import Link from "next/link";
 import { Field, FieldDescription, FieldGroup } from "@/components/ui/field";
 
@@ -27,8 +27,8 @@ const Page = () => {
       </Field>
       <Field className="flex">
         <div className="flex flex-row content-between">
-          <Button variant="sticky">ログイン</Button>
-          <Button variant="sticky-secondary">ゲストとして試す</Button>
+          <NoteButton variant="sticky">ログイン</NoteButton>
+          <NoteButton variant="stickySecondary">ゲストとして試す</NoteButton>
         </div>
         <Label>
           アカウントをお持ちでない方は<Link href="">新規登録</Link>

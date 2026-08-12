@@ -1,4 +1,4 @@
-import { ModeTabs } from "@/components/ui/mode-tabs";
+import { ModeTabs } from "@/components/common/mode-tabs";
 
 export default function ModeLayout({
   children,
