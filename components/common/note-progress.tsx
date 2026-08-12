@@ -14,6 +14,10 @@ const NoteProgress = ({
   max,
   className,
 }: NoteProgressProps) => {
+  // max must be greater than 0
+  if (max <= 0) {
+    throw new Error("max must be greater than zero");
+  }
   const percentage = Math.min(100, Math.round((current / max) * 100));
   const achieved = current >= max;
 
