@@ -79,12 +79,12 @@ src/
 
 ```json
 // components.json
-{
-  "aliases": {
-    "components": "@/design-system",
-    "utils": "@/design-system/lib/utils",
-    "ui": "@/design-system"
-  }
+"aliases": {
+  "components": "@/src/design-system",
+  "ui": "@/src/design-system",
+  "lib": "@/src/design-system/lib",
+  "utils": "@/src/design-system/lib/utils",
+  "hooks": "@/src/design-system/hooks"
 }
 ```
 
