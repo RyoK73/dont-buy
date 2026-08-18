@@ -1,6 +1,6 @@
 "use client";
 import { Bar, BarChart, BarShapeProps, Rectangle, XAxis } from "recharts";
-import { ChartContainer, type ChartConfig } from "../ui/chart";
+import { ChartContainer, type ChartConfig } from "@/design-system/ui/chart";
 
 const weekday = ["日", "月", "火", "水", "木", "金", "土"] as const;
 

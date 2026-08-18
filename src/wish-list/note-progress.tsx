@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/design-system/lib/utils";
 import { Progress } from "@base-ui/react";
 
 type NoteProgressProps = {

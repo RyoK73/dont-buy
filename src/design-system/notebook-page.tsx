@@ -4,8 +4,8 @@ import { useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 import { ThemeProvider, useTheme } from "next-themes";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/design-system/lib/utils";
+import { Button } from "@/design-system/ui/button";
 
 const emptySubscribe = () => () => {};
 

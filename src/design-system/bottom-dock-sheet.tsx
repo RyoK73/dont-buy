@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+import { cn } from "@/design-system/lib/utils";
+import { Sheet, SheetTrigger, SheetContent } from "@/design-system/ui/sheet";
 
 type BottomDockSheetPropsType = {
   triggerButton: React.ReactElement;
