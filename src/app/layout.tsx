@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Klee_One, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
-import { NotebookPage } from "@/components/common/notebook-page";
+import { cn } from "@/design-system/lib/utils";
+import { NotebookPage } from "@/design-system/notebook-page";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
