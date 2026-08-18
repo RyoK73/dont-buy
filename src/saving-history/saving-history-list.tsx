@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/design-system/ui/separator";
 
 export type SavingHistoryItemData = {
   id: string;

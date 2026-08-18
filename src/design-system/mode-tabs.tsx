@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/design-system/lib/utils";
 
 const TABS = [
   { label: "Don't Buy", href: "/dont-buy" },

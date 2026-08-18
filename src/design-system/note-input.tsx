@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { Input } from "@base-ui/react";
-import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
+import { Label } from "@/design-system/ui/label";
+import { cn } from "@/design-system/lib/utils";
 
 type NoteInputProps = Omit<React.ComponentProps<typeof Input>, "id"> & {
   id: string;

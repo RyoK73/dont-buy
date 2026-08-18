@@ -2,7 +2,7 @@ import { Toggle } from "@base-ui/react";
 import { ToggleGroup } from "@base-ui/react";
 import { Dispatch, SetStateAction } from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/design-system/lib/utils";
 
 type Category = {
   category: string;
