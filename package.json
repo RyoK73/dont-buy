@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "pnpm tsx ./dev-scripts/open-localhost.ts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -36,11 +36,14 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "consola": "^3.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.12",
+    "open": "^11.0.1",
+    "shadcn": "^4.16.1",
     "supabase": "^2.111.0",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "shadcn": "^4.16.1"
+    "tsx": "^4.23.12",
+    "typescript": "^5"
   }
 }
