@@ -19,6 +19,8 @@
 
 - `page.tsx`/`layout.tsx`にロジックやUIの実装を直接書かない
 - 実装は対応する`src/{vertical名}/`からimportして薄くつなぐだけ
+- `app`/`login`などにルーティング以外に必要なファイルを置かない。
+- ロジックを混在させるとルーティング定義と機能実装が増え肥大化・可読性低下につながる
 
 ### Example
 
@@ -39,6 +41,7 @@ src/
 │   │   ├── button.tsx
 │   │   └── dialog.tsx
 │   └── primary-button.tsx  # ui/ をラップした自社独自コンポーネント
+├── utils/                    # ドメインに属さない汎用関数
 └── widgets/                # 複数ページ・機能から使われる独立verticalの例
 ```
 
