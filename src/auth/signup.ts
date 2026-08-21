@@ -6,10 +6,9 @@ const signUpNewUser = async (email: string, password: string) => {
   const { data, error } = await supabase.auth.signUp({
     email: email,
     password: password,
-    options: {},
+    options: { emailRedirectTo: "/signup/confirm" },
   });
-  if (error) {
-  }
-  if (!error) {
-  }
+  return { data, error };
 };
+
+export { signUpNewUser };
