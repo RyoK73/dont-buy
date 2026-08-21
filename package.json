@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "check": "eslint && tsc --noEmit",
     "test": "vitest",
     "db:version": "supabase --version",
     "db:start": "supabase start",
