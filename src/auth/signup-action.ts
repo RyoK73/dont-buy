@@ -2,7 +2,14 @@
 import { signUpNewUser } from "@/auth/signup";
 import { redirect } from "next/navigation";
 
-const signUpAction = async (email: string, password: string) => {
+type FormState = { error: string } | undefined;
+
+const signUpAction = async (
+  _: FormState,
+  formData: FormData,
+): Promise<FormState> => {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
   const { data, error } = await signUpNewUser(email, password);
 
   // エラー通知用

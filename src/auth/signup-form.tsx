@@ -1,12 +1,19 @@
+"use client";
 import { NoteInput } from "@/design-system/note-input";
 import { NoteButton } from "@/design-system/note-button";
 import { Field, FieldGroup, FieldDescription } from "@/design-system/ui/field";
 import { Label } from "@/design-system/ui/label";
 import Link from "next/link";
+import { signUpAction } from "@/auth/signup-action";
+import { useActionState } from "react";
 
 export const SignUpForm = () => {
+  const [error, formAction, isPending] = useActionState(
+    signUpAction,
+    undefined,
+  );
   return (
-    <form>
+    <form action={formAction}>
       <FieldGroup>
         <Field>
           <NoteInput
@@ -32,7 +39,7 @@ export const SignUpForm = () => {
             <NoteButton variant="stickySecondary">ゲストとして試す</NoteButton>
           </div>
           <Label>
-            アカウントをお持ちでない方は<Link href="">新規登録</Link>
+            アカウントをお持ちでない方は<Link href="/signup">新規登録</Link>
           </Label>
         </Field>
       </FieldGroup>

@@ -20,20 +20,20 @@ Supabase Authによるメール＋パスワード認証と、`signInAnonymously(
 
 ### サインアップ
 
-- [ ] `src/auth/signup.ts`（`signUpNewUser`）: ドメインロジック層
-  - [ ] Supabase `auth.signUp` 呼び出し＋エラー判定のみを担当する（redirectは行わない）
-  - [ ] `{ data, error }` を返す（または `error` を `throw` する）形に整理する
+- [x] `src/auth/signup.ts`（`signUpNewUser`）: ドメインロジック層
+  - [x] Supabase `auth.signUp` 呼び出し＋エラー判定のみを担当する（redirectは行わない）
+  - [x] `{ data, error }` を返す（または `error` を `throw` する）形に整理する
 - [ ] `src/auth/signup-action.ts`（`signUpAction`, `"use server"`）: Server Action層。formの`action` propに直接渡す
-  - [ ] `signUpNewUser` を呼び出す
-  - [ ] try/catchでエラーを受け取り、`data.session` の有無でリダイレクト先を分岐する（`redirect()` はtry/catchの外で呼ぶ）
+  - [x] `signUpNewUser` を呼び出す
+  - [x] {error:error.message} | if分岐でredirectに変更。try,catchするまでもなく関数側で振り分け~~try/catchでエラーを受け取り、`data.session` の有無でリダイレクト先を分岐する（`redirect()` はtry/catchの外で呼ぶ）~~
     - `data.session`あり → 確認不要設定、ダッシュボード等へ
     - `data.session`なし → メール確認必須、確認案内ページへ
-  - [ ] エラー時はリダイレクトせず、エラーメッセージ等のstateを返す（トースト表示は呼び出し元の`signup-form`に任せる）
+  - [x] エラー時はリダイレクトせず、エラーメッセージ等のstateを返す（トースト表示は呼び出し元の`signup-form`に任せる）
 - [ ] メール認証時のページを用意する
 - [ ] メール認証中のページを用意する
-- [ ] `src/auth/signup-form.tsx` にフォーム送信ロジックを実装する
-  - [ ] `form`を使ったclient componentとして実装する（`"use client"`。トースト通知のため`useActionState`/`useEffect`を使用）
-  - [ ] `action`で`signup-action`（`signUpAction`）を呼ぶ
+- [x] `src/auth/signup-form.tsx` にフォーム送信ロジックを実装する
+  - [x] `form`を使ったclient componentとして実装する（`"use client"`。トースト通知のため`useActionState`/`useEffect`を使用）
+  - [x] `action`で`signup-action`（`signUpAction`）を呼ぶ
   - [ ] `signUpAction`が返すエラーstateを検知し、トースト通知を出す
 - [ ] `src/app/(auth)/signup/page.tsx`（現状空ファイル）に`SignUpForm`コンポーネント（`src/auth/signup-form.tsx`）呼び出しを実装する
 
