@@ -1,18 +1,28 @@
+"use client";
 import { NoteButton } from "@/design-system/note-button";
 import { Label } from "@/design-system/ui/label";
 import { NoteInput } from "@/design-system/note-input";
 import Link from "next/link";
 import { Field, FieldDescription, FieldGroup } from "@/design-system/ui/field";
 import { useActionState } from "react";
-import { signUpAction } from "@/auth/signup/signup-action";
+import { signInAction, type FormState } from "@/auth/signio/signin-action";
+import { SignInAnonymouslyAction } from "@/auth/signio/signin-annonymously-action";
+
+const authAction = async (prevState: FormState, formData: FormData) => {
+  const intent = formData.get("intent");
+  if (intent === "guest") {
+    return SignInAnonymouslyAction();
+  }
+  return signInAction(prevState, formData);
+};
 
 export const SignInForm = () => {
-  const [error, formAction, isPending] = useActionState(
-    signUpAction,
+  const [signInError, formSignInAction, isPending] = useActionState(
+    authAction,
     undefined,
   );
   return (
-    <form action={formAction}>
+    <form action={formSignInAction}>
       <FieldGroup>
         <Field>
           <NoteInput
@@ -34,8 +44,12 @@ export const SignInForm = () => {
         </Field>
         <Field className="flex">
           <div className="flex flex-row content-between">
-            <NoteButton variant="sticky">ログイン</NoteButton>
-            <NoteButton variant="stickySecondary">ゲストとして試す</NoteButton>
+            <NoteButton name="intent" value="signin" variant="sticky">
+              サインイン
+            </NoteButton>
+            <NoteButton name="intent" value="guest" variant="stickySecondary">
+              ゲストとしてサインイン
+            </NoteButton>
           </div>
           <Label>
             アカウントをお持ちでない方は<Link href="">新規登録</Link>

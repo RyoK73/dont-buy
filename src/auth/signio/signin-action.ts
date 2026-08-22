@@ -24,4 +24,4 @@ const signInAction = async (
   }
 };
 
-export { signInAction };
+export { type FormState, signInAction };
