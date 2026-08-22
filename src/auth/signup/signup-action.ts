@@ -1,5 +1,5 @@
 "use server";
-import { signUpNewUser } from "@/auth/signup";
+import { signUpNewUser } from "@/auth/signup/signup";
 import { redirect } from "next/navigation";
 
 type FormState = { error: string } | undefined;

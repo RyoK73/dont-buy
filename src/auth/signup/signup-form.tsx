@@ -4,7 +4,7 @@ import { NoteButton } from "@/design-system/note-button";
 import { Field, FieldGroup, FieldDescription } from "@/design-system/ui/field";
 import { Label } from "@/design-system/ui/label";
 import Link from "next/link";
-import { signUpAction } from "@/auth/signup-action";
+import { signUpAction } from "@/auth/signup/signup-action";
 import { useActionState } from "react";
 
 export const SignUpForm = () => {
