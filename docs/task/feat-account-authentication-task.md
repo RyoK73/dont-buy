@@ -23,7 +23,7 @@ Supabase Authによるメール＋パスワード認証と、`signInAnonymously(
 - [x] `src/auth/signup.ts`（`signUpNewUser`）: ドメインロジック層
   - [x] Supabase `auth.signUp` 呼び出し＋エラー判定のみを担当する（redirectは行わない）
   - [x] `{ data, error }` を返す（または `error` を `throw` する）形に整理する
-- [ ] `src/auth/signup-action.ts`（`signUpAction`, `"use server"`）: Server Action層。formの`action` propに直接渡す
+- [x] `src/auth/signup-action.ts`（`signUpAction`, `"use server"`）: Server Action層。formの`action` propに直接渡す
   - [x] `signUpNewUser` を呼び出す
   - [x] {error:error.message} | if分岐でredirectに変更。try,catchするまでもなく関数側で振り分け~~try/catchでエラーを受け取り、`data.session` の有無でリダイレクト先を分岐する（`redirect()` はtry/catchの外で呼ぶ）~~
     - `data.session`あり → 確認不要設定、ダッシュボード等へ
@@ -35,6 +35,7 @@ Supabase Authによるメール＋パスワード認証と、`signInAnonymously(
   - [x] `form`を使ったclient componentとして実装する（`"use client"`。トースト通知のため`useActionState`/`useEffect`を使用）
   - [x] `action`で`signup-action`（`signUpAction`）を呼ぶ
   - [ ] `signUpAction`が返すエラーstateを検知し、トースト通知を出す
+    - [ ] 現行shad cn/uiの`Toast`コンポーネントをインストールし直す(実装が違うみたい)
 - [ ] `src/app/(auth)/signup/page.tsx`（現状空ファイル）に`SignUpForm`コンポーネント（`src/auth/signup-form.tsx`）呼び出しを実装する
 
 ### ログイン
@@ -45,6 +46,7 @@ Supabase Authによるメール＋パスワード認証と、`signInAnonymously(
 - [ ] ゲストログインボタン（login-form.tsx, signup-form.tsx双方の「ゲストとして試す」）に`signInAnonymously()`を実装する
 - [ ] `src/app/(auth)/login/page.tsx` を`LoginForm`コンポーネント（`src/auth/login-form.tsx`）呼び出しに統一する（現状は内容を直書きで重複実装している）
 - [ ] login-form.tsx / signup-form.tsx 内の相互リンク（`<Link href="">`、`login-form.tsx:34`, `signup-form.tsx:35`）の遷移先を正しいパスに修正する
+- [ ] 未登録のユーザーの場合、サインアップ画面へ遷移する
 
 ### ログアウト
 
