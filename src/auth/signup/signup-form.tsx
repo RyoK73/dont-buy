@@ -8,12 +8,12 @@ import { signUpAction } from "@/auth/signup/signup-action";
 import { useActionState } from "react";
 
 export const SignUpForm = () => {
-  const [error, formAction, isPending] = useActionState(
+  const [signUpError, formSignUpAction, isPending] = useActionState(
     signUpAction,
     undefined,
   );
   return (
-    <form action={formAction}>
+    <form action={formSignUpAction}>
       <FieldGroup>
         <Field>
           <NoteInput
