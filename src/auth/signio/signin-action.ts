@@ -1,3 +1,4 @@
+"use server";
 import { signInWithEmail } from "@/auth/signio/signin";
 import { redirect } from "next/navigation";
 

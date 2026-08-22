@@ -35,12 +35,8 @@ export const SignUpForm = () => {
         </Field>
         <Field className="flex">
           <div className="flex flex-row content-between">
-            <NoteButton variant="sticky">ログイン</NoteButton>
-            <NoteButton variant="stickySecondary">ゲストとして試す</NoteButton>
+            <NoteButton variant="sticky">サインアップ</NoteButton>
           </div>
-          <Label>
-            アカウントをお持ちでない方は<Link href="/signup">新規登録</Link>
-          </Label>
         </Field>
       </FieldGroup>
     </form>
