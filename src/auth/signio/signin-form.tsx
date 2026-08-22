@@ -6,7 +6,7 @@ import { Field, FieldDescription, FieldGroup } from "@/design-system/ui/field";
 import { useActionState } from "react";
 import { signUpAction } from "@/auth/signup/signup-action";
 
-export const LoginForm = () => {
+export const SignInForm = () => {
   const [error, formAction, isPending] = useActionState(
     signUpAction,
     undefined,
