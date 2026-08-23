@@ -1,6 +1,5 @@
 "use client";
 import { NoteButton } from "@/design-system/note-button";
-import { Label } from "@/design-system/ui/label";
 import { NoteInput } from "@/design-system/note-input";
 import Link from "next/link";
 import { Field, FieldDescription, FieldGroup } from "@/design-system/ui/field";
@@ -23,13 +22,17 @@ export const SignInForm = () => {
     undefined,
   );
   useEffect(() => {
-    toast.add({
-      description: signInError?.error,
-    });
+    if (signInError?.error) {
+      toast.add({
+        title: "サインインできませんでした",
+        description: signInError.error,
+        type: "error",
+      });
+    }
   }, [signInError]);
 
   return (
-    <form action={formSignInAction}>
+    <form action={formSignInAction} className="flex flex-col gap-8">
       <FieldGroup>
         <Field>
           <NoteInput
@@ -51,32 +54,40 @@ export const SignInForm = () => {
           />
           <FieldDescription>パスワードを入力してください</FieldDescription>
         </Field>
-        <Field className="flex">
-          <div className="flex flex-row content-between">
-            <NoteButton
-              type="submit"
-              name="intent"
-              value="signin"
-              variant="sticky"
-              disabled={isPending}
-            >
-              {isPending ? "サインイン中" : "サインイン"}
-            </NoteButton>
-            <NoteButton
-              type="submit"
-              name="intent"
-              value="guest"
-              variant="stickySecondary"
-              disabled={isPending}
-            >
-              {isPending ? "サインイン中" : "ゲストとしてサインイン"}
-            </NoteButton>
-          </div>
-          <Label>
-            アカウントをお持ちでない方は<Link href="/signup">新規登録</Link>
-          </Label>
-        </Field>
       </FieldGroup>
+
+      <div className="flex flex-col gap-3">
+        <NoteButton
+          type="submit"
+          name="intent"
+          value="signin"
+          variant="sticky"
+          disabled={isPending}
+          className="w-full"
+        >
+          {isPending ? "サインイン中…" : "サインイン"}
+        </NoteButton>
+        <NoteButton
+          type="submit"
+          name="intent"
+          value="guest"
+          variant="stickySecondary"
+          size="sm"
+          disabled={isPending}
+          className="w-full rotate-0 opacity-80 hover:opacity-100"
+        >
+          {isPending ? "サインイン中…" : "ゲストとしてサインイン"}
+        </NoteButton>
+      </div>
+      <p className="text-center text-sm text-muted-foreground">
+        アカウントをお持ちでない方は{" "}
+        <Link
+          href="/signup"
+          className="font-medium text-primary underline underline-offset-4"
+        >
+          新規登録
+        </Link>
+      </p>
     </form>
   );
 };

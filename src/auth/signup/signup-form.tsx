@@ -1,6 +1,7 @@
 "use client";
 import { NoteInput } from "@/design-system/note-input";
 import { NoteButton } from "@/design-system/note-button";
+import Link from "next/link";
 import { Field, FieldGroup, FieldDescription } from "@/design-system/ui/field";
 import { signUpAction } from "@/auth/signup/signup-action";
 import { useActionState, useEffect } from "react";
@@ -12,10 +13,16 @@ export const SignUpForm = () => {
     undefined,
   );
   useEffect(() => {
-    toast.add({ description: signUpError?.error });
+    if (signUpError?.error) {
+      toast.add({
+        title: "登録できませんでした",
+        description: signUpError.error,
+        type: "error",
+      });
+    }
   }, [signUpError]);
   return (
-    <form action={formSignUpAction}>
+    <form action={formSignUpAction} className="flex flex-col gap-8">
       <FieldGroup>
         <Field>
           <NoteInput
@@ -37,14 +44,26 @@ export const SignUpForm = () => {
           />
           <FieldDescription>パスワードを入力してください</FieldDescription>
         </Field>
-        <Field className="flex">
-          <div className="flex flex-row content-between">
-            <NoteButton type="submit" variant="sticky" disabled={isPending}>
-              {isPending ? "サインアップ中" : "サインアップ"}
-            </NoteButton>
-          </div>
-        </Field>
       </FieldGroup>
+
+      <NoteButton
+        type="submit"
+        variant="sticky"
+        disabled={isPending}
+        className="w-full"
+      >
+        {isPending ? "登録中…" : "アカウントを作成"}
+      </NoteButton>
+
+      <p className="text-center text-sm text-muted-foreground">
+        すでにアカウントをお持ちの方は{" "}
+        <Link
+          href="/signin"
+          className="font-medium text-primary underline underline-offset-4"
+        >
+          サインイン
+        </Link>
+      </p>
     </form>
   );
 };

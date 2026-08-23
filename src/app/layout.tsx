@@ -45,8 +45,8 @@ export default function RootLayout({
         "font-sans",
       )}
     >
-      <body className="min-h-full flex flex-col">
-        <NotebookPage>{children}</NotebookPage>
+      <body className="h-full w-full flex flex-col">
+        <NotebookPage className="min-h-full w-full">{children}</NotebookPage>
         <Toaster />
       </body>
     </html>
