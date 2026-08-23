@@ -2,6 +2,7 @@
   "name": "dont-buy",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "pnpm tsx ./dev-scripts/open-localhost.ts",
     "build": "next build",
