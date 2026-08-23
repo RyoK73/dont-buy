@@ -2,8 +2,6 @@
 import { NoteInput } from "@/design-system/note-input";
 import { NoteButton } from "@/design-system/note-button";
 import { Field, FieldGroup, FieldDescription } from "@/design-system/ui/field";
-import { Label } from "@/design-system/ui/label";
-import Link from "next/link";
 import { signUpAction } from "@/auth/signup/signup-action";
 import { useActionState } from "react";
 
@@ -21,6 +19,7 @@ export const SignUpForm = () => {
             id="email-input"
             type="email"
             placeholder="dont-buy@buy.com"
+            name="email"
           />
           <FieldDescription>メールアドレスを入力してください</FieldDescription>
         </Field>
@@ -30,6 +29,7 @@ export const SignUpForm = () => {
             id="password-input"
             type="password"
             placeholder="xxxxxxxx"
+            name="password"
           />
           <FieldDescription>パスワードを入力してください</FieldDescription>
         </Field>

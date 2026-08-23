@@ -30,6 +30,7 @@ export const SignInForm = () => {
             id="email-input"
             type="email"
             placeholder="dont-buy@buy.com"
+            name="email"
           />
           <FieldDescription>メールアドレスを入力してください</FieldDescription>
         </Field>
@@ -39,6 +40,7 @@ export const SignInForm = () => {
             id="password-input"
             type="password"
             placeholder="xxxxxxxx"
+            name="password"
           />
           <FieldDescription>パスワードを入力してください</FieldDescription>
         </Field>
