@@ -54,7 +54,7 @@ export const SignInForm = () => {
             </NoteButton>
           </div>
           <Label>
-            アカウントをお持ちでない方は<Link href="">新規登録</Link>
+            アカウントをお持ちでない方は<Link href="/signup">新規登録</Link>
           </Label>
         </Field>
       </FieldGroup>

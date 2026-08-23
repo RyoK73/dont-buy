@@ -16,8 +16,8 @@ const signInAction = async (
   if (error) return { error: error.message };
 
   // 未登録の場合のリダイレクト
-  if (data.session) {
-    redirect("/singup");
+  if (!data.session) {
+    redirect("/signup");
   } else {
     // 正常時のリダイレクト
     redirect("/dont-buy");
