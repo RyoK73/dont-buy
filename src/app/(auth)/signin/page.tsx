@@ -1,7 +1,7 @@
 import { SignInForm } from "@/auth/signio";
 
 const SignInPage = () => {
-  <SignInForm />;
+  return <SignInForm />;
 };
 
 export default SignInPage;
