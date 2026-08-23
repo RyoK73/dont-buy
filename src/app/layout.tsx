@@ -3,6 +3,7 @@ import { Geist_Mono, Klee_One, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/design-system/lib/utils";
 import { NotebookPage } from "@/design-system/notebook-page";
+import { Toaster } from "@/design-system/ui/toast";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <NotebookPage>{children}</NotebookPage>
+        <Toaster />
       </body>
     </html>
   );

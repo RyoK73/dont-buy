@@ -3,13 +3,17 @@ import { NoteInput } from "@/design-system/note-input";
 import { NoteButton } from "@/design-system/note-button";
 import { Field, FieldGroup, FieldDescription } from "@/design-system/ui/field";
 import { signUpAction } from "@/auth/signup/signup-action";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { toast } from "@/design-system/ui/toast";
 
 export const SignUpForm = () => {
   const [signUpError, formSignUpAction, isPending] = useActionState(
     signUpAction,
     undefined,
   );
+  useEffect(() => {
+    toast.add({ description: signUpError?.error });
+  }, [signUpError]);
   return (
     <form action={formSignUpAction}>
       <FieldGroup>
@@ -35,7 +39,9 @@ export const SignUpForm = () => {
         </Field>
         <Field className="flex">
           <div className="flex flex-row content-between">
-            <NoteButton variant="sticky">サインアップ</NoteButton>
+            <NoteButton type="submit" variant="sticky" disabled={isPending}>
+              {isPending ? "サインアップ中" : "サインアップ"}
+            </NoteButton>
           </div>
         </Field>
       </FieldGroup>
