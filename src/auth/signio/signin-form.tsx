@@ -41,6 +41,7 @@ export const SignInForm = () => {
             type="email"
             placeholder="dont-buy@buy.com"
             name="email"
+            required={true}
           />
           <FieldDescription>メールアドレスを入力してください</FieldDescription>
         </Field>
@@ -51,6 +52,7 @@ export const SignInForm = () => {
             type="password"
             placeholder="xxxxxxxx"
             name="password"
+            required={true}
           />
           <FieldDescription>パスワードを入力してください</FieldDescription>
         </Field>
