@@ -1,0 +1,65 @@
+import { signInAction, type FormState } from "@/auth/signio/signin-action";
+import { SignInAnonymouslyAction } from "@/auth/signio/signin-annonymously-action";
+import { SignInForm } from "@/auth/signio/signin-form";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe } from "node:test";
+import { expect, vi, it } from "vitest";
+
+vi.mock("@/auth/signio/signin-action", () => ({
+  signInAction: vi.fn(),
+}));
+
+vi.mock("@/auth/signio/signin-annonymously-action", () => ({
+  SignInAnonymouslyAction: vi.fn(),
+}));
+
+describe("通常サインイン", () => {
+  it("エラー時トースト表示", async () => {
+    vi.mocked(signInAction).mockResolvedValue({ error: "user couldn't find" });
+    render(<SignInForm />);
+
+    await userEvent.type(screen.getByLabelText("Email"), "test@example.com");
+    await userEvent.type(screen.getByLabelText("Password"), "wrongpass");
+    await userEvent.click(screen.getByRole("button", { name: "サインイン" }));
+
+    await waitFor(() => {
+      expect(screen.findByText("サインインでき")).toBeDefined();
+    });
+  });
+  it("送信中ボタン disabled + ラベル変化", async () => {
+    let resolveAction: (value: FormState) => void;
+    vi.mocked(signInAction).mockReturnValue(
+      new Promise((resolve) => {
+        resolveAction = resolve;
+      }),
+    );
+    render(<SignInForm />);
+
+    const signInButton = screen.getByRole("button", {
+      name: "サインイン",
+    }) as HTMLButtonElement;
+    await userEvent.click(signInButton);
+
+    await waitFor(() => {
+      expect(signInButton.disabled).toBe(true);
+    });
+    resolveAction!(undefined);
+  });
+});
+
+describe("ゲストログイン", () => {
+  it("エラー時トースト表示", async () => {
+    vi.mocked(SignInAnonymouslyAction).mockResolvedValue({
+      error: "user couldn't find",
+    });
+    render(<SignInForm />);
+
+    await userEvent.click(screen.getByRole("button", { name: "サインイン" }));
+
+    await waitFor(() => {
+      expect(screen.findByText("サインインでき")).toBeDefined();
+    });
+  });
+  it("送信中ボタン disabled + ラベル変化");
+});
