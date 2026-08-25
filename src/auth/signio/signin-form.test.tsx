@@ -43,8 +43,8 @@ describe("通常サインイン", () => {
 
     await waitFor(() => {
       expect(signInButton.disabled).toBe(true);
+      resolveAction!(undefined);
     });
-    resolveAction!(undefined);
   });
 });
 
@@ -55,11 +55,31 @@ describe("ゲストログイン", () => {
     });
     render(<SignInForm />);
 
-    await userEvent.click(screen.getByRole("button", { name: "サインイン" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "ゲストとしてサインイン" }),
+    );
 
     await waitFor(() => {
       expect(screen.findByText("サインインでき")).toBeDefined();
     });
   });
-  it("送信中ボタン disabled + ラベル変化");
+  it("送信中ボタン disabled + ラベル変化", async () => {
+    let resolveAction: (value: FormState) => void;
+    vi.mocked(SignInAnonymouslyAction).mockReturnValue(
+      new Promise((resolve) => {
+        resolveAction = resolve;
+      }),
+    );
+    render(<SignInForm />);
+
+    const signInAnnonymouslyButton = screen.getByRole("button", {
+      name: "ゲストとしてサインイン",
+    }) as HTMLButtonElement;
+    await userEvent.click(signInAnnonymouslyButton);
+
+    await waitFor(() => {
+      expect(signInAnnonymouslyButton.disabled).toBeDefined();
+      resolveAction!(undefined);
+    });
+  });
 });
