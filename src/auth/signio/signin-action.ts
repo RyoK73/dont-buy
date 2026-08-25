@@ -13,7 +13,7 @@ const signInAction = async (
 
   const { data, error } = await signInWithEmail(email, password);
 
-  if (error) return { error: error.message };
+  if (error) return { error: error.message }; // メール認証が行われていない場合もエラーとなる
 
   // 正常時のリダイレクト
   redirect("/dont-buy");
