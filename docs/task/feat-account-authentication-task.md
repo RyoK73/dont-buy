@@ -40,9 +40,9 @@ Supabase Authによるメール＋パスワード認証と、`signInAnonymously(
 
 ### ログイン
 
-- [ ] ログイン処理関数を新規作成する（`signInWithPassword`を呼ぶ。配置は`src/auth/signup.ts`に倣い`src/auth/login.ts`を想定）
-  - [ ] 構造自体はsignup処理と同じ感じ
-- [ ] `src/auth/login-form.tsx` を`<form>`要素化しフォーム送信ロジックを実装する（現状`<form>`タグすら無い）
+- [x] ログイン処理関数を新規作成する（`signInWithPassword`を呼ぶ。配置は`src/auth/signup.ts`に倣い`src/auth/login.ts`を想定）
+  - [x] 構造自体はsignup処理と同じ感じ
+- [x] `src/auth/login-form.tsx` を`<form>`要素化しフォーム送信ロジックを実装する（現状`<form>`タグすら無い）
 - [ ] ゲストログインボタン（login-form.tsx, signup-form.tsx双方の「ゲストとして試す」）に`signInAnonymously()`を実装する
 - [ ] `src/app/(auth)/login/page.tsx` を`LoginForm`コンポーネント（`src/auth/login-form.tsx`）呼び出しに統一する（現状は内容を直書きで重複実装している）
 - [ ] login-form.tsx / signup-form.tsx 内の相互リンク（`<Link href="">`、`login-form.tsx:34`, `signup-form.tsx:35`）の遷移先を正しいパスに修正する
