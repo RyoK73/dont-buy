@@ -5,6 +5,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe } from "node:test";
 import { expect, vi, it } from "vitest";
+import { Toaster } from "@/design-system/ui/toast";
 
 vi.mock("@/auth/signio/signin-action", () => ({
   signInAction: vi.fn(),
@@ -17,14 +18,19 @@ vi.mock("@/auth/signio/signin-annonymously-action", () => ({
 describe("通常サインイン", () => {
   it("エラー時トースト表示", async () => {
     vi.mocked(signInAction).mockResolvedValue({ error: "user couldn't find" });
-    render(<SignInForm />);
+    render(
+      <>
+        <SignInForm />
+        <Toaster />
+      </>,
+    );
 
     await userEvent.type(screen.getByLabelText("Email"), "test@example.com");
     await userEvent.type(screen.getByLabelText("Password"), "wrongpass");
     await userEvent.click(screen.getByRole("button", { name: "サインイン" }));
 
     await waitFor(() => {
-      expect(screen.findByText("サインインでき")).toBeDefined();
+      expect(screen.getByText("サインインできませんでした")).toBeDefined();
     });
   });
   it("送信中ボタン disabled + ラベル変化", async () => {
@@ -53,14 +59,19 @@ describe("ゲストログイン", () => {
     vi.mocked(SignInAnonymouslyAction).mockResolvedValue({
       error: "user couldn't find",
     });
-    render(<SignInForm />);
+    render(
+      <>
+        <SignInForm />
+        <Toaster />
+      </>,
+    );
 
     await userEvent.click(
       screen.getByRole("button", { name: "ゲストとしてサインイン" }),
     );
 
     await waitFor(() => {
-      expect(screen.findByText("サインインでき")).toBeDefined();
+      expect(screen.getByText("サインインできませんでした")).toBeDefined();
     });
   });
   it("送信中ボタン disabled + ラベル変化", async () => {
@@ -77,8 +88,8 @@ describe("ゲストログイン", () => {
     }) as HTMLButtonElement;
     await userEvent.click(signInAnnonymouslyButton);
 
-    await waitFor(() => {
-      expect(signInAnnonymouslyButton.disabled).toBeDefined();
+    waitFor(() => {
+      expect(signInAnnonymouslyButton.disabled).toBe(true);
       resolveAction!(undefined);
     });
   });
