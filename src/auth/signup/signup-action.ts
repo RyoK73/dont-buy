@@ -25,4 +25,4 @@ const signUpAction = async (
   }
 };
 
-export { signUpAction };
+export { signUpAction, type FormState };
