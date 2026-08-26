@@ -1,63 +1,104 @@
 import { vi, it, describe, expect } from "vitest";
 import { signUpAction } from "@/auth/signup/signup-action";
+import { signUpNewUser } from "@/auth/signup/signup";
 import { redirect } from "next/navigation";
+import { User, Session, AuthError } from "@supabase/supabase-js";
 
 vi.mock("@/auth/signup/signup", () => ({
-  signUpNewUser: (email: string, password: string) => {
-    type User = {
-      info: { email: string; password: string };
-      data: { session: boolean };
-    };
-    const users: User[] = [
-      {
-        info: { email: "test@example.com", password: "password123" },
-        data: { session: true },
-      },
-      {
-        info: { email: "exam@exmaple.com", password: "password987" },
-        data: { session: false },
-      },
-    ];
-
-    let error: { message: string } | null = null;
-    let data = { session: false };
-    const validUser: User | undefined = users.find(
-      (user) => user.info.email === email && user.info.password === password,
-    );
-    if (!validUser) {
-      error = { message: "user couldn't find" };
-    } else {
-      data = validUser.data;
-    }
-
-    return { data, error };
-  },
+  signUpNewUser: vi.fn(),
 }));
 vi.mock("next/navigation", () => ({
   redirect: vi.fn(),
 }));
 
-describe("サインイン処理", () => {
-  it("エラーがあればエラーメッセージオブジェクトを返す", async () => {
+const createMockUser = (overrides: Partial<User> = {}): User => {
+  return {
+    id: "test",
+    aud: "test",
+    app_metadata: {},
+    user_metadata: {},
+    created_at: "2026-08-26",
+    ...overrides,
+  };
+};
+
+const createMockSession = (overrides: Partial<Session> = {}): Session => {
+  return {
+    access_token: "test",
+    refresh_token: "test",
+    expires_in: 1,
+    token_type: "bearer",
+    user: createMockUser(),
+    ...overrides,
+  };
+};
+describe("サインアップ処理", () => {
+  it("登録済みのメールアドレスの場合", async () => {
+    vi.mocked(signUpNewUser).mockResolvedValue({
+      data: {
+        user: createMockUser({ identities: [] }),
+        session: null,
+      },
+      error: null,
+    });
+
     const formData = new FormData();
-    formData.append("email", "invalid@example.com");
-    formData.append("password", "invalid@example.com");
+    formData.append("email", "test");
+    formData.append("password", "test");
+
     expect(await signUpAction(undefined, formData)).toEqual({
-      error: "user couldn't find",
+      error: "このメールアドレスは既に登録されています",
     });
   });
-  it("data.sessionがなければ/signupへリダイレクトする", async () => {
+  it("メールアドレスとパスワードが空欄の場合", async () => {
     const formData = new FormData();
-    formData.append("email", "exam@exmaple.com");
-    formData.append("password", "password987");
-    await signUpAction(undefined, formData);
-    expect(redirect).toHaveBeenCalledWith("/signup/confirm");
+    formData.append("email", "");
+    formData.append("password", "");
+    expect(await signUpAction(undefined, formData)).toEqual({
+      error: "EmailまたはPasswordが必要です",
+    });
   });
-  it("data.sessionがあれば/dont-buyへリダイレクトする", async () => {
+  it("予期せぬエラーの場合", async () => {
+    vi.mocked(signUpNewUser).mockResolvedValue({
+      data: {
+        user: createMockUser(),
+        session: null,
+      },
+      error: new AuthError("予期せぬエラーが発生しました", 500, "3"),
+    });
     const formData = new FormData();
     formData.append("email", "test@example.com");
-    formData.append("password", "password123");
+    formData.append("password", "test123");
+    expect(await signUpAction(undefined, formData)).toEqual({
+      error: "予期せぬエラーが発生しました",
+    });
+  });
+  it("ユーザーがメール認証済みの場合のredirect", async () => {
+    vi.mocked(signUpNewUser).mockResolvedValue({
+      data: {
+        user: createMockUser(),
+        session: createMockSession(),
+      },
+      error: null,
+    });
+    const formData = new FormData();
+    formData.append("email", "test@example.com");
+    formData.append("password", "test123");
     await signUpAction(undefined, formData);
     expect(redirect).toHaveBeenCalledWith("/dont-buy");
+  });
+  it("ユーザーがメール認証をしていない場合のredirect", async () => {
+    vi.mocked(signUpNewUser).mockResolvedValue({
+      data: {
+        user: createMockUser(),
+        session: null,
+      },
+      error: null,
+    });
+    const formData = new FormData();
+    formData.append("email", "test@example.com");
+    formData.append("password", "test123");
+    await signUpAction(undefined, formData);
+    expect(redirect).toHaveBeenCalledWith("/signup/confirm");
   });
 });
