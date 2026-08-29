@@ -33,7 +33,7 @@ const createMockSession = (overrides: Partial<Session> = {}): Session => {
   };
 };
 describe("サインアップ処理", () => {
-  it("登録済みのメールアドレスの場合", async () => {
+  it("登録済みのメールアドレスの場合、登録済みである旨のエラーオブジェクトを返す", async () => {
     vi.mocked(signUpNewUser).mockResolvedValue({
       data: {
         user: createMockUser({ identities: [] }),
@@ -50,7 +50,7 @@ describe("サインアップ処理", () => {
       error: "このメールアドレスは既に登録されています",
     });
   });
-  it("メールアドレスとパスワードが空欄の場合", async () => {
+  it("メールアドレスとパスワードが空欄の場合、入力を促すエラーオブジェクトを返す", async () => {
     const formData = new FormData();
     formData.append("email", "");
     formData.append("password", "");
@@ -58,7 +58,7 @@ describe("サインアップ処理", () => {
       error: "EmailまたはPasswordが必要です",
     });
   });
-  it("予期せぬエラーの場合", async () => {
+  it("予期せぬエラーの場合、予期せぬエラーオブジェクトを返す", async () => {
     vi.mocked(signUpNewUser).mockResolvedValue({
       data: {
         user: createMockUser(),
@@ -73,7 +73,7 @@ describe("サインアップ処理", () => {
       error: "予期せぬエラーが発生しました",
     });
   });
-  it("ユーザーがメール認証済みの場合のredirect", async () => {
+  it("ユーザーがメール認証済みの場合、'/dont-buy'へ遷移する", async () => {
     vi.mocked(signUpNewUser).mockResolvedValue({
       data: {
         user: createMockUser(),
@@ -87,7 +87,7 @@ describe("サインアップ処理", () => {
     await signUpAction(undefined, formData);
     expect(redirect).toHaveBeenCalledWith("/dont-buy");
   });
-  it("ユーザーがメール認証をしていない場合のredirect", async () => {
+  it("ユーザーがメール認証をしていない場合、'/signup/confirm'へ遷移する", async () => {
     vi.mocked(signUpNewUser).mockResolvedValue({
       data: {
         user: createMockUser(),
