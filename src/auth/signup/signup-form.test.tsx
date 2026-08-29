@@ -42,11 +42,13 @@ describe("サインアップ", () => {
       name: "アカウントを作成",
     });
 
+    await userEvent.type(screen.getByLabelText("Email"), "test@test.com");
+    await userEvent.type(screen.getByLabelText("Password"), "test1234");
     await userEvent.click(signUpButton);
 
     // pending中
     await waitFor(() => {
-      expect(signUpButton).toBeEnabled();
+      expect(signUpButton).toBeDisabled();
     });
 
     resolveAction!(undefined);
