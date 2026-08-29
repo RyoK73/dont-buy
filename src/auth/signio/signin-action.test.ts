@@ -1,63 +1,77 @@
 import { vi, it, describe, expect } from "vitest";
 import { signInAction } from "@/auth/signio/signin-action";
 import { redirect } from "next/navigation";
-
+import { signInWithEmail } from "@/auth/signio/signin";
+import { AuthError, User, Session } from "@supabase/supabase-js";
 vi.mock("@/auth/signio/signin", () => ({
-  signInWithEmail: (email: string, password: string) => {
-    type User = {
-      info: { email: string; password: string };
-      data: { session: boolean };
-    };
-    const users: User[] = [
-      {
-        info: { email: "test@example.com", password: "password123" },
-        data: { session: true },
-      },
-      {
-        info: { email: "exam@exmaple.com", password: "password987" },
-        data: { session: false },
-      },
-    ];
-
-    let error: { message: string } | null = null;
-    let data = { session: false };
-    const validUser: User | undefined = users.find(
-      (user) => user.info.email === email && user.info.password === password,
-    );
-    if (!validUser) {
-      error = { message: "user couldn't find" };
-    } else {
-      data = validUser.data;
-    }
-
-    return { data, error };
-  },
+  signInWithEmail: vi.fn(),
 }));
 vi.mock("next/navigation", () => ({
   redirect: vi.fn(),
 }));
 
+// supabaseのsignInWithEmailの戻り値作成用関数1
+const createMockUser = (overrides: Partial<User> = {}): User => ({
+  id: "test",
+  aud: "test",
+  app_metadata: {},
+  user_metadata: {},
+  created_at: "2026-8-28",
+  ...overrides,
+});
+
+// supabaseのsignInWithEmailの戻り値作成用関数2
+const createMockSession = (overrides: Partial<Session> = {}): Session => ({
+  access_token: "test",
+  refresh_token: "test",
+  expires_in: 1,
+  token_type: "bearer",
+  user: createMockUser(),
+  ...overrides,
+});
+
 describe("サインイン処理", () => {
-  it("エラーがあればエラーメッセージオブジェクトを返す", async () => {
+  // signUpWithEmailまで到達しないので{data,error}の戻り値のMockは不要
+  it("emailとpasswordが空白の場合、入力を促すエラーオブジェクトを返す", async () => {
     const formData = new FormData();
-    formData.append("email", "invalid@example.com");
-    formData.append("password", "invalid@example.com");
+    formData.append("email", "");
+    formData.append("password", "");
     expect(await signInAction(undefined, formData)).toEqual({
-      error: "user couldn't find",
+      error: "EmailまたはPasswordが必要です",
     });
   });
-  it("data.sessionがなければ/signupへリダイレクトする", async () => {
+
+  it("その他のエラーがあればエラーメッセージオブジェクトを返す", async () => {
+    // signUpWithEmailの戻り値{data,error}が必要
+    vi.mocked(signInWithEmail).mockResolvedValue({
+      data: {
+        user: createMockUser(),
+        session: createMockSession(),
+      },
+      error: new AuthError("an Error has occured"),
+    });
+
     const formData = new FormData();
-    formData.append("email", "exam@exmaple.com");
-    formData.append("password", "password987");
-    await signInAction(undefined, formData);
-    expect(redirect).toHaveBeenCalledWith("/signup");
+    formData.append("email", "test@test.com");
+    formData.append("password", "test1234");
+    expect(await signInAction(undefined, formData)).toEqual({
+      error: "an Error has occured",
+    });
   });
-  it("data.sessionがあれば/dont-buyへリダイレクトする", async () => {
+  it("正常サインイン時に/dont-buyに遷移する", async () => {
+    vi.mocked(signInWithEmail).mockResolvedValue({
+      data: {
+        user: createMockUser(),
+        session: createMockSession(),
+      },
+      error: null,
+    });
+
     const formData = new FormData();
-    formData.append("email", "test@example.com");
-    formData.append("password", "password123");
+    formData.append("email", "test@test.com");
+    formData.append("password", "test1234");
     await signInAction(undefined, formData);
+
     expect(redirect).toHaveBeenCalledWith("/dont-buy");
   });
 });
