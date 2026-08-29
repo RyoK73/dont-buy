@@ -43,8 +43,8 @@ describe("サインアップ処理", () => {
     });
 
     const formData = new FormData();
-    formData.append("email", "test");
-    formData.append("password", "test");
+    formData.append("email", "test@test.com");
+    formData.append("password", "test1234");
 
     expect(await signUpAction(undefined, formData)).toEqual({
       error: "このメールアドレスは既に登録されています",
