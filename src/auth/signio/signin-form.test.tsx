@@ -66,7 +66,8 @@ describe("通常サインイン", () => {
 });
 
 describe("ゲストサインイン", () => {
-  it("エラー時トースト表示", async () => {
+  // 本来ゲストサインインはEmail,Passwordの入力は不要だが、js-domがformNoValidateを付与したsubmitに対応していないため、このテストではEmail,Passwordを渡す
+  it("エラー時にトースト通知が表示される", async () => {
     vi.mocked(SignInAnonymouslyAction).mockResolvedValue({
       error: "user couldn't find",
     });
@@ -87,23 +88,40 @@ describe("ゲストサインイン", () => {
       await screen.findByText("サインインできませんでした"),
     ).toBeInTheDocument();
   });
-  it("送信中ボタン disabled + ラベル変化", async () => {
+
+  it("'ゲストとしてサインイン'ボタンに'formNoValidate'が付与されている", async () => {
+    render(<SignInForm />);
+    const guestSignInButton = screen.getByRole("button", {
+      name: "ゲストとしてサインイン",
+    });
+    expect(guestSignInButton).toHaveAttribute("formNoValidate");
+  });
+  it("'ゲストとしてサインイン'ボタン押下後、ボタンが'disabled'になり、完了後'enabled'に変わる", async () => {
     let resolveAction: (value: FormState) => void;
     vi.mocked(SignInAnonymouslyAction).mockReturnValue(
       new Promise((resolve) => {
         resolveAction = resolve;
       }),
     );
+
     render(<SignInForm />);
 
-    const signInAnnonymouslyButton = screen.getByRole("button", {
+    const guestSignInButton = screen.getByRole("button", {
       name: "ゲストとしてサインイン",
-    }) as HTMLButtonElement;
-    await userEvent.click(signInAnnonymouslyButton);
+    });
 
-    waitFor(() => {
-      expect(signInAnnonymouslyButton.disabled).toBe(true);
-      resolveAction!(undefined);
+    await userEvent.type(screen.getByLabelText("Email"), "test@test.com");
+    await userEvent.type(screen.getByLabelText("Password"), "test1234");
+    await userEvent.click(guestSignInButton);
+
+    await waitFor(() => {
+      expect(guestSignInButton).toBeDisabled();
+    });
+
+    resolveAction!(undefined);
+
+    await waitFor(() => {
+      expect(guestSignInButton).toBeEnabled();
     });
   });
 });

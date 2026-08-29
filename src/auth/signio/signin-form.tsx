@@ -73,6 +73,7 @@ export const SignInForm = () => {
           type="submit"
           name="intent"
           value="guest"
+          formNoValidate
           variant="stickySecondary"
           size="sm"
           disabled={isPending}
