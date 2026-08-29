@@ -16,7 +16,7 @@ vi.mock("@/auth/signio/signin-annonymously-action", () => ({
 }));
 
 describe("通常サインイン", () => {
-  it("エラー時トースト表示", async () => {
+  it("エラー時にトースト通知が表示される", async () => {
     vi.mocked(signInAction).mockResolvedValue({ error: "user couldn't find" });
     render(
       <>
@@ -29,11 +29,12 @@ describe("通常サインイン", () => {
     await userEvent.type(screen.getByLabelText("Password"), "wrongpass");
     await userEvent.click(screen.getByRole("button", { name: "サインイン" }));
 
-    await waitFor(() => {
-      expect(screen.getByText("サインインできませんでした")).toBeDefined();
-    });
+    expect(
+      await screen.findByText("サインインできませんでした"),
+    ).toBeInTheDocument();
   });
-  it("送信中ボタン disabled + ラベル変化", async () => {
+
+  it("サインインボタン押下後、ボタンがdisabledになり、完了後再度有効になる", async () => {
     let resolveAction: (value: FormState) => void;
     vi.mocked(signInAction).mockReturnValue(
       new Promise((resolve) => {
@@ -44,12 +45,22 @@ describe("通常サインイン", () => {
 
     const signInButton = screen.getByRole("button", {
       name: "サインイン",
-    }) as HTMLButtonElement;
+    });
+
+    await userEvent.type(screen.getByLabelText("Email"), "test@test.com");
+    await userEvent.type(screen.getByLabelText("Password"), "test1234");
     await userEvent.click(signInButton);
 
+    // pending中
     await waitFor(() => {
-      expect(signInButton.disabled).toBe(true);
-      resolveAction!(undefined);
+      expect(signInButton).toBeDisabled();
+    });
+
+    // pending解除
+    resolveAction!(undefined);
+
+    await waitFor(() => {
+      expect(signInButton).toBeEnabled();
     });
   });
 });
