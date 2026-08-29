@@ -10,7 +10,7 @@ vi.mock("@/auth/signup/signup-action", () => ({
 }));
 
 describe("サインアップ", () => {
-  it("サインアップエラーのトースト通知が表示されるか", async () => {
+  it("サインアップボタン押下後、エラーの場合トースト通知が表示される", async () => {
     vi.mocked(signUpAction).mockResolvedValue({ error: "SignUp Failed" });
     render(
       <>
@@ -18,32 +18,41 @@ describe("サインアップ", () => {
         <Toaster />
       </>,
     );
+    await userEvent.type(screen.getByLabelText("Email"), "test@email.com");
+    await userEvent.type(screen.getByLabelText("Password"), "test1234");
 
     await userEvent.click(
       screen.getByRole("button", { name: "アカウントを作成" }),
     );
 
-    await waitFor(() => {
-      expect(screen.getByText("登録できませんでした")).toBeDefined();
-    });
+    expect(await screen.findByText("登録できませんでした")).toBeInTheDocument();
   });
-  it("サインアップ処理中にbuttonがdisableに変化するか", async () => {
+
+  it("サインアップボタン押下後、ボタンはdisabledになり、完了は再度有効になる", async () => {
     let resolveAction: (value: FormState) => void;
     vi.mocked(signUpAction).mockReturnValue(
       new Promise((resolve) => {
         resolveAction = resolve;
       }),
     );
+
     render(<SignUpForm />);
+
     const signUpButton = screen.getByRole("button", {
       name: "アカウントを作成",
-    }) as HTMLButtonElement;
+    });
 
     await userEvent.click(signUpButton);
 
+    // pending中
     await waitFor(() => {
-      expect(signUpButton.disabled).toBe(true);
-      resolveAction!(undefined);
+      expect(signUpButton).toBeEnabled();
+    });
+
+    resolveAction!(undefined);
+
+    await waitFor(() => {
+      expect(signUpButton).toBeEnabled();
     });
   });
 });
