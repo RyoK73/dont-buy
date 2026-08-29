@@ -65,7 +65,7 @@ describe("通常サインイン", () => {
   });
 });
 
-describe("ゲストログイン", () => {
+describe("ゲストサインイン", () => {
   it("エラー時トースト表示", async () => {
     vi.mocked(SignInAnonymouslyAction).mockResolvedValue({
       error: "user couldn't find",
@@ -77,13 +77,15 @@ describe("ゲストログイン", () => {
       </>,
     );
 
+    await userEvent.type(screen.getByLabelText("Email"), "test@test.com");
+    await userEvent.type(screen.getByLabelText("Password"), "test1234");
     await userEvent.click(
       screen.getByRole("button", { name: "ゲストとしてサインイン" }),
     );
 
-    await waitFor(() => {
-      expect(screen.getByText("サインインできませんでした")).toBeDefined();
-    });
+    expect(
+      await screen.findByText("サインインできませんでした"),
+    ).toBeInTheDocument();
   });
   it("送信中ボタン disabled + ラベル変化", async () => {
     let resolveAction: (value: FormState) => void;
