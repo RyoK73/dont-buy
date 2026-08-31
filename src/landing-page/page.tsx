@@ -27,7 +27,7 @@ const LandingPage = () => {
         </li>
         <li>節約履歴を振り返れる統計UI</li>
       </ul>
-      <Link href="/login">今すぐ始める</Link>
+      <Link href="/signin">今すぐ始める</Link>
     </div>
   );
 };

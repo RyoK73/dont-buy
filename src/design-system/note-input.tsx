@@ -28,7 +28,7 @@ function NoteInput({
           type={variant === "price" ? "number" : type}
           inputMode={variant === "price" ? "numeric" : undefined}
           className={cn(
-            "h-auto rounded-none border-0 bg-transparent px-1 py-1 shadow-none focus-visible:ring-0",
+            "h-auto w-full rounded-none border-0 bg-transparent px-1 py-1 shadow-none focus-visible:ring-0",
             variant === "price" && "text-right",
             className,
           )}

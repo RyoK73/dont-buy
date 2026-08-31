@@ -56,7 +56,7 @@ const NotebookPage = ({ children, className }: NotebookPageProps) => {
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <div
         className={cn(
-          "relative mx-auto min-h-full w-full max-w-107 bg-neutral-paper text-on-surface",
+          "relative mx-auto min-h-full w-full bg-neutral-paper text-on-surface",
           className,
         )}
         style={{

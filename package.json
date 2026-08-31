@@ -2,11 +2,14 @@
   "name": "dont-buy",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "pnpm tsx ./dev-scripts/open-localhost.ts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "check": "eslint && tsc --noEmit",
+    "test": "vitest",
     "db:version": "supabase --version",
     "db:start": "supabase start",
     "db:stop": "supabase stop",
@@ -33,17 +36,24 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.0.5",
     "consola": "^3.4.2",
-    "eslint": "^9",
+    "eslint": "9.x",
     "eslint-config-next": "16.2.12",
+    "jsdom": "^30.0.1",
     "open": "^11.0.1",
     "shadcn": "^4.16.1",
     "supabase": "^2.111.0",
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.10"
   }
 }
