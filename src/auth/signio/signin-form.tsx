@@ -5,13 +5,13 @@ import Link from "next/link";
 import { Field, FieldDescription, FieldGroup } from "@/design-system/ui/field";
 import { useActionState, useEffect } from "react";
 import { signInAction, type FormState } from "@/auth/signio/signin-action";
-import { SignInAnonymouslyAction } from "@/auth/signio/signin-annonymously-action";
+import { signInAnonymouslyAction } from "@/auth/signio/signin-anonymously-action";
 import { toast } from "@/design-system/ui/toast";
 
 const authAction = async (prevState: FormState, formData: FormData) => {
   const intent = formData.get("intent");
   if (intent === "guest") {
-    return SignInAnonymouslyAction();
+    return signInAnonymouslyAction();
   }
   return signInAction(prevState, formData);
 };

@@ -1,5 +1,5 @@
 import { signInAction, type FormState } from "@/auth/signio/signin-action";
-import { SignInAnonymouslyAction } from "@/auth/signio/signin-annonymously-action";
+import { signInAnonymouslyAction } from "@/auth/signio/signin-anonymously-action";
 import { SignInForm } from "@/auth/signio/signin-form";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -11,8 +11,8 @@ vi.mock("@/auth/signio/signin-action", () => ({
   signInAction: vi.fn(),
 }));
 
-vi.mock("@/auth/signio/signin-annonymously-action", () => ({
-  SignInAnonymouslyAction: vi.fn(),
+vi.mock("@/auth/signio/signin-anonymously-action", () => ({
+  signInAnonymouslyAction: vi.fn(),
 }));
 
 describe("通常サインイン", () => {
@@ -68,7 +68,7 @@ describe("通常サインイン", () => {
 describe("ゲストサインイン", () => {
   // 本来ゲストサインインはEmail,Passwordの入力は不要だが、js-domがformNoValidateを付与したsubmitに対応していないため、このテストではEmail,Passwordを渡す
   it("エラー時にトースト通知が表示される", async () => {
-    vi.mocked(SignInAnonymouslyAction).mockResolvedValue({
+    vi.mocked(signInAnonymouslyAction).mockResolvedValue({
       error: "user couldn't find",
     });
     render(
@@ -98,7 +98,7 @@ describe("ゲストサインイン", () => {
   });
   it("'ゲストとしてサインイン'ボタン押下後、ボタンが'disabled'になり、完了後'enabled'に変わる", async () => {
     let resolveAction: (value: FormState) => void;
-    vi.mocked(SignInAnonymouslyAction).mockReturnValue(
+    vi.mocked(signInAnonymouslyAction).mockReturnValue(
       new Promise((resolve) => {
         resolveAction = resolve;
       }),
